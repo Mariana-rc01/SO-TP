@@ -1,5 +1,5 @@
 /**
- * @file client.c
+ * @file parser.h
  * @brief
  */
 
@@ -19,9 +19,11 @@
  *   limitations under the License.
  */
 
-#ifndef CLIENT_H
-#define CLIENT_H
+#ifndef PARSER_H
+#define PARSER_H
 
-int main();
+#define MAXN 20
+
+typedef int (*requested_function)(char*);
 
 #endif

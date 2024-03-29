@@ -19,4 +19,9 @@
  *   limitations under the License.
  */
 
+#ifndef ORCHESTRATOR_H
+#define ORCHESTRATOR_H
+
 int main();
+
+#endif

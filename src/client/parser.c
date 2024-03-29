@@ -1,6 +1,6 @@
 /**
- * @file client.c
- * @brief
+ * @file parser.c
+ * @brief 
  */
 
 /*
@@ -19,9 +19,23 @@
  *   limitations under the License.
  */
 
-#ifndef CLIENT_H
-#define CLIENT_H
+#include "client/parser.h"
 
-int main();
+#include <stdio.h>
+#include <stdlib.h>
 
-#endif
+void process_input(char* data, requested_function func){
+    
+    int res = -1;
+    char* exec_args[MAXN];
+    int i = 0;
+    char* comando = strdup(data);
+    char* token;
+
+    while((token = strsep(&comando, " ")) != NULL){
+        exec_args[i] = strdup(token);
+        i++;
+    }
+    // a partir daqui tem que ir para tratamento de comando do orquestrador
+
+}
