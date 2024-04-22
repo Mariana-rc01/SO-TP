@@ -22,6 +22,5 @@
 #ifndef ORCHESTRATOR_H
 #define ORCHESTRATOR_H
 
-int main();
 
 #endif

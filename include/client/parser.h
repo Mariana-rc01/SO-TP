@@ -22,8 +22,8 @@
 #ifndef PARSER_H
 #define PARSER_H
 
-#define MAXN 20
+#include "task.h"
 
-typedef int (*requested_function)(char*);
+Task process_input(char* data[], int argc);
 
 #endif

@@ -23,19 +23,25 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <sys/time.h>
+#include <string.h>
+#include <unistd.h>
 
-void process_input(char* data, requested_function func){
+Task process_input(char* data[], int argc){
+    int i;
+    struct timeval tv;
+
+    Task task = {
+        .pid = getpid(),
+        .time_start = gettimeofday(&tv, NULL),
+        .time_expected = atoi(data[2]),
+    };
     
-    int res = -1;
-    char* exec_args[MAXN];
-    int i = 0;
-    char* comando = strdup(data);
-    char* token;
-
-    while((token = strsep(&comando, " ")) != NULL){
-        exec_args[i] = strdup(token);
-        i++;
+    for(i = 0; i < argc - 4; i++){
+        //strcpy(task.exec_args[i], strdup(data[i+4]));
+        task.exec_args[i] = data[i+4];
     }
-    // a partir daqui tem que ir para tratamento de comando do orquestrador
+    task.exec_args[i] = NULL;
 
+    return task;
 }
