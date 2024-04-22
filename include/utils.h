@@ -1,5 +1,5 @@
 /**
- * @file client.c
+ * @file utils.h
  * @brief
  */
 
@@ -19,8 +19,9 @@
  *   limitations under the License.
  */
 
-#ifndef CLIENT_H
-#define CLIENT_H
+#ifndef UTILS_H
+#define UTILS_H
 
+char* my_concat(const char* s1, int num);
 
 #endif

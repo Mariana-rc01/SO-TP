@@ -1,5 +1,5 @@
 /**
- * @file client.c
+ * @file task.h
  * @brief
  */
 
@@ -19,8 +19,16 @@
  *   limitations under the License.
  */
 
-#ifndef CLIENT_H
-#define CLIENT_H
+#ifndef TASK_H
+#define TASK_H
+#define SERVER "fifo_server"
+
+typedef struct task{
+    int pid; // identificador de cada processo
+    int time_start; // tempo em que a tarefa comecou
+    int time_expected; // tempo que o utilizador pensa que a tarefa irá demorar
+    char* exec_args[300]; // argumentos da task para a sua execução
+} Task;
 
 
 #endif

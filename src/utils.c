@@ -1,5 +1,5 @@
 /**
- * @file client.c
+ * @file utils.c
  * @brief
  */
 
@@ -18,9 +18,17 @@
  *   See the License for the specific language governing permissions and
  *   limitations under the License.
  */
+#include "utils.h"
 
-#ifndef CLIENT_H
-#define CLIENT_H
+#include <stdlib.h>
+#include <stdio.h>
 
+char* my_concat(const char* s1, int num){
+    int len = snprintf(NULL, 0, "%s%d", s1, num);
 
-#endif
+    char* result = (char*)malloc(len+1);
+
+    snprintf(result, len + 1, "%s%d", s1, num);
+
+    return result;
+}

@@ -19,7 +19,7 @@
 # START CONFIGURATION
 
 CC             := gcc
-CFLAGS         := -Wall -Wextra -Werror -pedantic -fexec-charset=UTF-8 -Iinclude
+CFLAGS         := -Wall -Wextra -Werror -pedantic -fexec-charset=UTF-8 -Iinclude -Wno-unused-variable
 DEBUG_CFLAGS   := -g
 RELEASE_CFLAGS := -O2
 
@@ -64,17 +64,19 @@ client: bin/client
 folders:
 	@mkdir -p src include obj bin tmp
 
-bin/orchestrator: obj/orchestrator/orchestrator.o
+bin/orchestrator: obj/orchestrator/orchestrator.o obj/utils.o 
+	mkdir -p $(@D)
 	$(CC) $(CFLAGS) $^ -o $@
 
-bin/client: obj/client/client.o
+bin/client: obj/client/client.o obj/task.o obj/client/parser.o obj/utils.o
 	$(CC) $(CFLAGS) $^ -o $@
 
 obj/%.o: src/%.c
+	mkdir -p $(@D)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -f obj/* tmp/* bin/*
+	rm -f obj/client/* obj/orchestrator/* tmp/* bin/*
 
 # END MAKEFILE RULES
 
