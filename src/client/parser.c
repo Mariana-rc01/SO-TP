@@ -27,18 +27,27 @@
 #include <string.h>
 #include <unistd.h>
 
-Task process_input(char* data[], int argc){
+Task processInput(int argc, char* data[]){
+
+    if(strcmp(data[1], "status") == 0){
+        Task task; 
+        task.pid = getpid();
+        task.command_flag = STATUS;
+        return task;
+    }
+    
     int i;
     struct timeval tv;
 
     Task task = {
         .pid = getpid(),
         .time_start = gettimeofday(&tv, NULL),
+        .time_end = 0,
         .time_expected = atoi(data[2]),
+        .command_flag = FLAG_U,
     };
     
     for(i = 0; i < argc - 4; i++){
-        //strcpy(task.exec_args[i], strdup(data[i+4]));
         task.exec_args[i] = data[i+4];
     }
     task.exec_args[i] = NULL;

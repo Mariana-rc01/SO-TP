@@ -50,14 +50,17 @@ int main(int argc, char* argv[]){
     int fifo_read = open(SERVER, O_RDONLY); // fifo para o server ler os pedidos do cliente
     int fifo_write =  open(SERVER, O_WRONLY); // fifo para o server se manter aberto
 
+    Queue queue = createTaskQueue(255);
+
     int read_bytes = 0;
     Task task;
 
-    while((read_bytes = read(fifo_read, &task, sizeof(Task))) > 0){
-        char* client = my_concat("fifo_", task.pid);
-
-        printf("%s\n", client);
-
+    while(1){
+        if((read_bytes = read(fifo_read, &task, sizeof(Task))) > 0){
+            char* client = myConcat("fifo_", task.pid);
+            printf("%s\n", client);
+            processTaskFromServer(&task, queue);
+        }
     }
     close(fifo_read);
 

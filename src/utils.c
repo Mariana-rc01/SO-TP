@@ -23,7 +23,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-char* my_concat(const char* s1, int num){
+char* myConcat(const char* s1, int num){
     int len = snprintf(NULL, 0, "%s%d", s1, num);
 
     char* result = (char*)malloc(len+1);

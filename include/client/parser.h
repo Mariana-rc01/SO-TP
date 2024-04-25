@@ -24,6 +24,6 @@
 
 #include "task.h"
 
-Task process_input(char* data[], int argc);
+Task processInput(int argc, char* data[]);
 
 #endif

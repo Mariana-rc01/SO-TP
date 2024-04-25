@@ -64,11 +64,11 @@ client: bin/client
 folders:
 	@mkdir -p src include obj bin tmp
 
-bin/orchestrator: obj/orchestrator/orchestrator.o obj/utils.o 
+bin/orchestrator: obj/orchestrator/orchestrator.o obj/utils.o obj/task.o 
 	mkdir -p $(@D)
 	$(CC) $(CFLAGS) $^ -o $@
 
-bin/client: obj/client/client.o obj/task.o obj/client/parser.o obj/utils.o
+bin/client: obj/client/client.o obj/task.o obj/client/parser.o obj/utils.o obj/task.o
 	$(CC) $(CFLAGS) $^ -o $@
 
 obj/%.o: src/%.c

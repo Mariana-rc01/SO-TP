@@ -22,6 +22,6 @@
 #ifndef UTILS_H
 #define UTILS_H
 
-char* my_concat(const char* s1, int num);
+char* myConcat(const char* s1, int num);
 
 #endif
