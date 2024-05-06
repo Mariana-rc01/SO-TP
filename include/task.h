@@ -47,26 +47,99 @@ typedef struct task_queue{
     Task** tasks;
 } Queue;
 
+/**
+ * @brief Creates a new task queue.
+ *
+ * @param size The initial size of the queue.
+ * @return Queue* A pointer to the newly created queue.
+ */
 Queue* createTaskQueue(int size);
 
+/**
+ * @brief Inserts a task into the queue.
+ *
+ * @param task The task to insert.
+ * @param queue The queue to insert into.
+ */
 void insertTask(Task* task, Queue* queue);
 
+/**
+ * @brief Inserts a task into the queue in a sorted manner based on expected time.
+ *
+ * @param task The task to insert.
+ * @param queue The queue to insert into.
+ */
 void insertTaskSorted(Task* task, Queue* queue);
 
+/**
+ * @brief Frees the memory allocated for a task queue.
+ *
+ * @param queue The queue to free.
+ */
 void freeQueue(Queue* queue);
 
+/**
+ * @brief Processes a task sent from a client.
+ *
+ * @param task The task to process.
+ * @return int 0 if successful, -1 otherwise.
+ */
 int processTaskFromClient(Task task);
 
+/**
+ * @brief Processes the status command.
+ *
+ * @param name The name of the FIFO.
+ * @param queue The task queue.
+ * @param pathOutput The path to the output directory.
+ */
 void processStatus(char* name, Queue* queue, char* pathOutput);
 
+/**
+ * @brief Processes a task received from the server.
+ *
+ * @param task The task to process.
+ * @param queue The task queue.
+ * @param pathOutput The path to the output directory.
+ * @param flag_sched_policy Flag indicating the scheduling policy.
+ */
 void processTaskFromServer(Task task, Queue* queue, char* pathOutput, int flag_sched_policy);
 
+/**
+ * @brief Executes a command with flag '-u'.
+ *
+ * @param arg The argument string.
+ * @param id The ID of the task.
+ * @param pathOutput The path to the output directory.
+ * @return int The exit status of the command.
+ */
 int exec_command_flag_u(char* arg, int id, char* pathOutput);
 
+/**
+ * @brief Executes a command without any flags.
+ *
+ * @param arg The argument string.
+ * @return int The exit status of the command.
+ */
 int exec_command(char* arg);
 
+/**
+ * @brief Executes a command with flag '-p'.
+ *
+ * @param arg The argument string.
+ * @param id The ID of the task.
+ * @param pathOutput The path to the output directory.
+ * @return int The exit status of the command.
+ */
 int exec_command_flag_p(char* arg, int id, char* pathOutput);
 
+/**
+ * @brief Changes the status of a task in the queue.
+ *
+ * @param queue The task queue.
+ * @param task The task with updated information.
+ */
 void changeTaskInQueue(Queue* queue, Task task);
+
 
 #endif

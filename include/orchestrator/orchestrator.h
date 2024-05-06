@@ -22,6 +22,13 @@
 #ifndef ORCHESTRATOR_H
 #define ORCHESTRATOR_H
 
-void monitor(int monitor_read_fd, int monitor_write_fd);
+/**
+ * @brief Manages a task.
+ *
+ * @param id The ID of the manager.
+ * @param output_folder The output folder path.
+ * @param task The task to manage.
+ */
+void manager(int id, char* output_folder, Task task);
 
 #endif

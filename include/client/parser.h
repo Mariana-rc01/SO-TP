@@ -24,6 +24,14 @@
 
 #include "task.h"
 
+/**
+ * @brief Processes the input arguments and creates a task accordingly.
+ *
+ * @param argc The number of command-line arguments.
+ * @param data An array of strings containing the input data.
+ * @return Task The task created based on the input data.
+ */
 Task processInput(int argc, char* data[]);
+
 
 #endif
