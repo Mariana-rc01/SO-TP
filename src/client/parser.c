@@ -30,27 +30,37 @@
 Task processInput(int argc, char* data[]){
 
     if(strcmp(data[1], "status") == 0){
-        Task task; 
+        Task task;
         task.pid = getpid();
         task.command_flag = STATUS;
+        task.manager_id = -1;
         return task;
     }
     
     int i;
     struct timeval tv;
-
+    
     Task task = {
         .pid = getpid(),
-        .time_start = gettimeofday(&tv, NULL),
-        .time_end = 0,
+        .time_spent = 0,
         .time_expected = atoi(data[2]),
         .command_flag = FLAG_U,
+        .manager_id = -1,
     };
-    
-    for(i = 0; i < argc - 4; i++){
-        task.exec_args[i] = data[i+4];
+
+    gettimeofday(&task.time_start, NULL);
+    gettimeofday(&task.time_end, NULL);
+    for (int i = 4; i < argc; i++) {
+        strcat(task.exec_args, data[i]);
+        strcat(task.exec_args, " ");
     }
-    task.exec_args[i] = NULL;
+
+    if(strcmp(data[3], "-p") == 0){
+        task.command_flag = FLAG_P;
+    }
+    else{
+        task.command_flag = FLAG_U;
+    }
 
     return task;
 }

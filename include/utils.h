@@ -22,6 +22,22 @@
 #ifndef UTILS_H
 #define UTILS_H
 
+#include <sys/time.h>
+
 char* myConcat(const char* s1, int num);
+
+void toUpperCase(char* str);
+
+char* extractProgramU(char* string);
+
+char* extractProgram(char* string, int flag_command);
+
+char** splitString(char* string, char* delimiter, int* num_commands);
+
+int freeManager(int managers[], int N);
+
+int calculateElapsedTime(struct timeval start, struct timeval end);
+
+void printMessageError(int flag);
 
 #endif

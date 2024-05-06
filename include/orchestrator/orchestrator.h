@@ -22,5 +22,6 @@
 #ifndef ORCHESTRATOR_H
 #define ORCHESTRATOR_H
 
+void monitor(int monitor_read_fd, int monitor_write_fd);
 
 #endif
