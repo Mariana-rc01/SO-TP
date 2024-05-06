@@ -19,7 +19,7 @@
 # START CONFIGURATION
 
 CC             := gcc
-CFLAGS         := -Wall -Wextra -Werror -pedantic -fexec-charset=UTF-8 -Iinclude -Wno-unused-variable
+CFLAGS         := -Wall -Wextra -Werror=unused-result -Werror -pedantic -fexec-charset=UTF-8 -Iinclude -Wno-unused-variable
 DEBUG_CFLAGS   := -g
 RELEASE_CFLAGS := -O2
 
@@ -64,7 +64,7 @@ client: bin/client
 folders:
 	@mkdir -p src include obj bin tmp
 
-bin/orchestrator: obj/orchestrator/orchestrator.o obj/utils.o obj/task.o 
+bin/orchestrator: obj/orchestrator/orchestrator.o obj/utils.o obj/task.o
 	mkdir -p $(@D)
 	$(CC) $(CFLAGS) $^ -o $@
 
@@ -76,7 +76,10 @@ obj/%.o: src/%.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -f obj/client/* obj/orchestrator/* tmp/* bin/*
+	find bin/ -maxdepth 1 \( -type f -not \( -name 'hello' -o -name 'void' \) \) -o \( -type p \) -delete
+	rm -f bin/client
+	rm -f bin/orchestrator
+	rm -f obj/client/* obj/orchestrator/* tmp/*
 
 # END MAKEFILE RULES
 
