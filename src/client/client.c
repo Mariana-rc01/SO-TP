@@ -32,6 +32,13 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 
+/**
+ * @brief The main function of the client program.
+ *
+ * @param argc The number of command-line arguments.
+ * @param argv An array of strings containing the command-line arguments.
+ * @return int The exit status of the program.
+ */
 int main(int argc, char* argv[]){
     Task task;
 

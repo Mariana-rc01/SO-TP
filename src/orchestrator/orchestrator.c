@@ -77,6 +77,13 @@ void manager(int id, char* output_folder, Task task){
     }
 }
 
+/**
+ * @brief The main function of the orchestrator.
+ *
+ * @param argc The number of command-line arguments.
+ * @param argv The array of command-line arguments.
+ * @return int The exit status of the program.
+ */
 int main(int argc, char* argv[]){
     int flag_sched_policy = 0;
     if(argc != 4){
