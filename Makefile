@@ -79,7 +79,7 @@ clean:
 	find bin/ -maxdepth 1 \( -type f -not \( -name 'hello' -o -name 'void' \) \) -o \( -type p \) -delete
 	rm -f bin/client
 	rm -f bin/orchestrator
-	rm -f obj/client/* obj/orchestrator/* tmp/*
+	rm -f obj/client/* obj/orchestrator/* obj/* tmp/*
 
 # END MAKEFILE RULES
 

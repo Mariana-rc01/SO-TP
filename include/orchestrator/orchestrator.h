@@ -22,6 +22,8 @@
 #ifndef ORCHESTRATOR_H
 #define ORCHESTRATOR_H
 
+#include "task.h"
+
 /**
  * @brief Manages a task.
  *

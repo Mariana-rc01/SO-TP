@@ -33,11 +33,11 @@ typedef struct task{
     int pid; // identificador de cada processo
     struct timeval time_start; // tempo em que a tarefa comecou
     struct timeval time_end; // tempo em que a tarefa terminou
-    int time_spent;
+    int time_spent; // tempo que a task efetivamente demorou a executar
     int time_expected; // tempo que o utilizador pensa que a tarefa irá demorar
-    int command_flag; // flag para determinar a que comando corresponde a task (status, execute -u ou execute -p)
+    int command_flag; // flag para determinar a que comando corresponde a task                                 (status, execute -u ou execute -p)
     char exec_args[500]; // argumentos da task para a sua execução
-    int manager_id;
+    int manager_id; // identificador do manager
 } Task;
 
 typedef struct task_queue{

@@ -88,6 +88,7 @@ int main(int argc, char* argv[]){
     int flag_sched_policy = 0;
     if(argc != 4){
         printMessageError(0);
+        return -1;
     }
     else {
         toUpperCase(argv[3]);
@@ -95,13 +96,13 @@ int main(int argc, char* argv[]){
             flag_sched_policy = 0;
             char message[500];
             int length;
-            length = snprintf(message, sizeof(message), "\033[91m[The orchestrator is running with the first come first served (FCFS) scheduling policy.]\033[0m\n");
+            length = snprintf(message, sizeof(message), "\033[92m[The orchestrator is running with the first come first served (FCFS) scheduling policy.]\033[0m\n");
             length = write(1, message, length);
         }
         else if(strcmp(argv[3], "SJF") == 0){
             char message[500];
             int length;
-            length = snprintf(message, sizeof(message), "\033[1;91m[The orchestrator is running with the shortest job first (SJF) scheduling policy.]\033[0m\n");
+            length = snprintf(message, sizeof(message), "\033[1;92m[The orchestrator is running with the shortest job first (SJF) scheduling policy.]\033[0m\n");
             length = write(1, message, length);
             flag_sched_policy = 1;
         }
