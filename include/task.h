@@ -29,22 +29,30 @@
 
 #include <sys/time.h>
 
+/**
+ * @struct Task
+ * @brief Represents a task with associated information.
+ */
 typedef struct task{
-    int pid; // identificador de cada processo
-    struct timeval time_start; // tempo em que a tarefa comecou
-    struct timeval time_end; // tempo em que a tarefa terminou
-    int time_spent; // tempo que a task efetivamente demorou a executar
-    int time_expected; // tempo que o utilizador pensa que a tarefa irá demorar
-    int command_flag; // flag para determinar a que comando corresponde a task                                 (status, execute -u ou execute -p)
-    char exec_args[500]; // argumentos da task para a sua execução
-    int manager_id; // identificador do manager
+    int pid; /**< Identifier of each process */
+    struct timeval time_start; /**< Time when the task started */
+    struct timeval time_end; /**< Time when the task ended */
+    int time_spent; /**< Time the task actually took to execute */
+    int time_expected; /**< Expected time for the task to complete */
+    int command_flag; /**< Flag to determine which command the task corresponds to (status, execute -u, or execute -p) */
+    char exec_args[500]; /**< Arguments of the task for its execution */
+    int manager_id; /**< Identifier of the manager */
 } Task;
 
+/**
+ * @struct Queue
+ * @brief Represents a queue of tasks.
+ */
 typedef struct task_queue{
-    int size;
-    int qpointer;
-    int last_added; // Posição do último valor adicionado
-    Task** tasks;
+    int size; /**< Size of the queue */
+    int qpointer; /**< Queue pointer */
+    int last_added; /**< Position of the last added value */
+    Task** tasks; /**< Array of pointers to tasks */
 } Queue;
 
 /**
