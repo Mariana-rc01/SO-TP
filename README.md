@@ -1,5 +1,7 @@
 # SO-TP
 
+## Grade: 19/20 :star:
+
 ## Building
 
 ### Dependencies

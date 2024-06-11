@@ -33,7 +33,7 @@
 #include <sys/wait.h>
 #include <sys/time.h>
 
-void manager(int id, char* output_folder, Task task){
+void manager(char* output_folder, Task task){
 
     if (task.command_flag == FLAG_U){
         exec_command_flag_u(task.exec_args, task.pid, output_folder);
@@ -44,7 +44,7 @@ void manager(int id, char* output_folder, Task task){
     gettimeofday(&task.time_end, NULL);
 
     task.time_spent = calculateElapsedTime(task.time_start, task.time_end);
-    task.manager_id = id;
+    task.manager_id = 1;
 
     char log_file[50];
     sprintf(log_file, "../%s/log.txt", output_folder);
@@ -119,9 +119,6 @@ int main(int argc, char* argv[]){
 
     int NUM_TASKS_MAX = atoi(argv[2]);
     int num_tasks_running = 0;
-    int manager_free[NUM_TASKS_MAX]; // 0 - livre, 1 - ocupado
-    int manager_fifo[NUM_TASKS_MAX];
-
 
     char* output_folder = argv[1];
 
@@ -137,16 +134,6 @@ int main(int argc, char* argv[]){
     int fifo_read = open(SERVER, O_RDONLY);
     int fifo_write_Open = open(SERVER, O_WRONLY);
 
-    for(int i = 0; i < NUM_TASKS_MAX; i++){
-        char* name_fifo = myConcat("manager_",i);
-        if (mkfifo(name_fifo,0666) < 0){
-            perror("Error on creating fifo");
-            free(name_fifo);
-            return -1;
-        }
-        free(name_fifo);
-        manager_free[i] = 0;
-    }
     Queue* queue = createTaskQueue(255);
 
     int read_bytes = 0;
@@ -166,27 +153,22 @@ int main(int argc, char* argv[]){
                 length = snprintf(message, sizeof(message), "\033[0;93m[Task %d done]\033[0m\n", task.pid);
                 length = write(1, message, length);
                 if(num_tasks_running > 0) num_tasks_running--;
-                manager_free[free] = 0;
             }
         }
 
         if (num_tasks_running < NUM_TASKS_MAX){
-            int free = freeManager(manager_free,NUM_TASKS_MAX);
-            if (free != -1){
-                if (queue->qpointer < queue->last_added) {
-                    Task new_task = *(queue->tasks[queue->qpointer]);
-                    queue->qpointer++;
-                    manager_free[free] = 1;
-                    if (fork() == 0){
-                        char message[100];
-                        int length;
-                        length = snprintf(message, sizeof(message), "\033[0;32m[Task %d ready to send to the manager]\033[0m\n", new_task.pid);
-                        length = write(1, message, length);
-                        manager(free, output_folder, new_task);
-                        _exit(0);
-                    }
-                    else num_tasks_running++;
+            if (queue->qpointer < queue->last_added) {
+                Task new_task = *(queue->tasks[queue->qpointer]);
+                queue->qpointer++;
+                if (fork() == 0){
+                    char message[100];
+                    int length;
+                    length = snprintf(message, sizeof(message), "\033[0;32m[Task %d ready to send to the manager]\033[0m\n", new_task.pid);
+                    length = write(1, message, length);
+                    manager(output_folder, new_task);
+                    _exit(0);
                 }
+                else num_tasks_running++;
             }
         }
     }

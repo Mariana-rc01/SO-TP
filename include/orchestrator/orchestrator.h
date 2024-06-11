@@ -27,10 +27,9 @@
 /**
  * @brief Manages a task.
  *
- * @param id The ID of the manager.
  * @param output_folder The output folder path.
  * @param task The task to manage.
  */
-void manager(int id, char* output_folder, Task task);
+void manager(char* output_folder, Task task);
 
 #endif
